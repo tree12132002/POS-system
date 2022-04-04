@@ -6,7 +6,7 @@ const settingController = {
     Menu.findAll({
       raw: true
     })
-      .then(menus => 
+      .then(menus =>
         res.render('setting', { menus }))
       .catch(err => next(err))
   },
@@ -15,16 +15,46 @@ const settingController = {
   },
   postMenu: (req, res, next) => {
     const { name, price } = req.body
-    
-    // if (!name || !price) {
-    //   return redirect('create-menu')
-    // }
+
+    if (!name || !price) {
+      return res.redirect('/setting/create')
+    }
     Menu.create({
       name,
       price
     })
       .then(() => {
         res.redirect('setting')
+      })
+      .catch(err => next(err))
+  },
+  editMenu: (req, res, next) => {
+    Menu.findByPk(req.params.id, { raw: true })
+      .then(menu => {
+        if (!menu) {
+          return res.redirect('/setting/:id/edit')
+        }
+        res.render('edit-menu', { menu })
+      })
+      .catch(err => next(err))
+  },
+  putMenu: (req, res, next) => {
+    const { name, price } = req.body
+    if (!name || !price) {
+      return res.redirect('/setting/:id/edit')
+    }
+    Menu.findByPk(req.params.id)
+      .then(menu => {
+        if (!menu) {
+          return res.redirect('/setting/:id/edit')
+        }
+        return menu.update({
+          name,
+          price
+        })
+      })
+      .then(() => {
+        res.redirect('/setting')
       })
       .catch(err => next(err))
   }
