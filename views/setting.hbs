@@ -1,0 +1,35 @@
+<h1>Setting</h1>
+<a href="/setting/create">
+  <button class="btn btn-primary" type="button">新增餐點</button>
+</a>
+<br>
+<br>
+<table class="table align-middle">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+      <th scope="col">Price</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each menues}}
+    <tr>
+      <th scope="row">{{this.id}}</th>
+      <td>{{this.name}}</td>
+      <td>{{this.price}}</td>
+      <td>
+        <button type="button" class="btn btn-link">
+          <a class="btn btn-link link-primary" href="#">
+            Edit
+          </a>
+        </button>
+        <form action="" style="display: inline;">
+          <button class="btn btn-link link danger">Delete</button>
+        </form>
+      </td>
+    </tr>
+    {{/each}}
+  </tbody>
+</table>
