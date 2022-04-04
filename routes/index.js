@@ -7,7 +7,10 @@ const settingController = require('../controllers/setting-controller')
 router.get('/tables', orderController.getTables)
 
 // setting
+router.get('/setting/create', settingController.createMenu)
 router.get('/setting', settingController.getSetting)
+router.post('/setting', settingController.postMenu)
+
 
 router.use('/', (req, res) => {
   res.redirect('/tables')

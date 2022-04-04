@@ -1,4 +1,3 @@
-const res = require('express/lib/response')
 const { Menu } = require('../models')
 
 const settingController = {
@@ -7,7 +6,26 @@ const settingController = {
     Menu.findAll({
       raw: true
     })
-      .then(menus => res.render('setting'))
+      .then(menus => 
+        res.render('setting', { menus }))
+      .catch(err => next(err))
+  },
+  createMenu: (req, res) => {
+    return res.render('create-menu')
+  },
+  postMenu: (req, res, next) => {
+    const { name, price } = req.body
+    
+    // if (!name || !price) {
+    //   return redirect('create-menu')
+    // }
+    Menu.create({
+      name,
+      price
+    })
+      .then(() => {
+        res.redirect('setting')
+      })
       .catch(err => next(err))
   }
 }
