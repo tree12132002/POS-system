@@ -1,11 +1,15 @@
 const express = require('express')
+const routes = require('./routes')
+const exphbs = require('express-handlebars')
+
 const app = express()
 const PORT = 3000
 
-// routes setting
-app.get('/', (req, res) => {
-  res.send('hello world')
-})
+// handlebars
+app.engine('hbs', exphbs({ defaultLayout: 'main', extname: '.hbs' }))
+app.set('view engine', 'hbs')
+
+app.use(routes)
 
 // start and listen on the Express server
 app.listen(PORT, () => {
