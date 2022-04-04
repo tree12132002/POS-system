@@ -57,6 +57,19 @@ const settingController = {
         res.redirect('/setting')
       })
       .catch(err => next(err))
+  },
+  deleteMenu: (req, res, next) => {
+    return Menu.findByPk(req.params.id)
+      .then(menu => {
+        if (!menu) {
+          return res.redirect('/setting/:id/edit')
+        }
+        return menu.destroy()
+      })
+      .then(() => {
+        res.redirect('/setting')
+      })
+      .catch(err => next(err))
   }
 }
 
