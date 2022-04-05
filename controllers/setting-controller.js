@@ -1,4 +1,5 @@
 const { Menu } = require('../models')
+const { Table } = require('../models')
 
 const settingController = {
   getSetting: (req, res, next) => {
@@ -66,6 +67,23 @@ const settingController = {
         }
         return menu.destroy()
       })
+      .then(() => {
+        res.redirect('/setting')
+      })
+      .catch(err => next(err))
+  },
+  createTable: (req, res) => {
+    return res.render('create-table')
+  },
+  postTable: (req, res, next) => {
+    const { name } = req.body
+
+    if (!name) {
+      return res.redirect('/setting')
+    }
+    Table.create({
+      name
+    })
       .then(() => {
         res.redirect('/setting')
       })

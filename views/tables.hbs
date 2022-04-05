@@ -1,7 +1,11 @@
-<div class="card w-25 text-center">
-  <div class="card-body">
-    <h5 class="card-title">桌號：1</h5>
-    <p class="card-text">要點餐嗎？</p>
-    <a href="/tables/order" class="btn btn-primary">點餐</a>
+<div class="row">
+  {{#each tables}}
+  <div class="card text-center m-3 col-2">
+    <div class="card-body">
+      <h5 class="card-title">桌號：{{this.name}}</h5>
+      <p class="card-text">要點餐嗎？</p>
+      <a href="/tables/order" class="btn btn-primary">點餐</a>
+    </div>
   </div>
+  {{/each}}
 </div>

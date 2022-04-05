@@ -9,12 +9,17 @@ router.get('/tables', orderController.getTables)
 router.get('/tables/order', orderController.getOrder)
 
 // setting
+// menu
 router.get('/setting/create', settingController.createMenu)
+router.post('/setting', settingController.postMenu)
 router.get('/setting/:id/edit', settingController.editMenu)
 router.put('/setting/:id', settingController.putMenu)
 router.delete('/setting/:id', settingController.deleteMenu)
+// table
+router.get('/setting/table', settingController.createTable)
+router.post('/setting/table', settingController.postTable)
+
 router.get('/setting', settingController.getSetting)
-router.post('/setting', settingController.postMenu)
 
 router.use('/', (req, res) => {
   res.redirect('/tables')
