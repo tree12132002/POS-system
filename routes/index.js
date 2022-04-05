@@ -4,7 +4,9 @@ const router = express.Router()
 const orderController = require('../controllers/order-controller')
 const settingController = require('../controllers/setting-controller')
 
+// order
 router.get('/tables', orderController.getTables)
+router.get('/tables/order', orderController.getOrder)
 
 // setting
 router.get('/setting/create', settingController.createMenu)
