@@ -2,20 +2,24 @@
   {{!-- left side --}}
   <div class="col-md-4">
     <div class="card">
+      <div class="card-header">
+        <h4>桌號：{{table.id}}</h1>
+      </div>
+      {{#each table.Orderlists}}
       <div class="card-body">
         <div class="text-end">
           <span>x</span>
         </div>
 
-        <h6 class="card-title">章魚燒</h6>
-        <div class="card-text">130元</div>
+        <h6 class="card-title">{{this.Menu.name}}</h6>
       </div>
-      
+
       <div class="card-footer text-end">
         <div class="card-text text-muted">
-          $ <span>130</span> 元
+          $ <span>{{this.Menu.price}}</span> 元
         </div>
       </div>
+      {{/each}}
     </div>
 
     <div class="text-end">
@@ -27,18 +31,23 @@
   <div class="col-md-8" style="outline: 1px solid steelblue;
   min-height: 600px;">
     <section class="menu">
-      <div class="row">
+      <form action="/tables/:id" method="POST" class="row">
+        <input type="hidden" name="table" id="table" value="{{table.id}}">
         {{#each menus}}
         <div class="col-3 mb-3">
           <div class="card text-center">
-            <button type="button"  class="card-body btn">
+            <label class="card-body btn">
               <h5 class="card-title">{{this.name}}</h5>
               <p>{{this.price}}元</p>
-            </button>
+              <input type="radio" id="item" name="item" value="{{this.id}}">
+            </label>
           </div>
         </div>
         {{/each}}
-      </div>
+        <button type="submit" class="btn btn-primary">
+          add
+        </button>
+      </form>
     </section>
   </div>
 </div>

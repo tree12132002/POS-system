@@ -5,7 +5,8 @@ const settingController = {
   getSetting: (req, res, next) => {
     // return res.render('setting')
     Menu.findAll({
-      raw: true
+      raw: true,
+      nest: true
     })
       .then(menus =>
         res.render('setting', { menus }))
