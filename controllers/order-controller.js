@@ -34,12 +34,31 @@ const orderController = {
   },
   postOrder: (req, res, next) => {
     const { tableId, menuId } = req.body
+
+    if (!tableId || !menuId) {
+      return res.redirect('back')
+    }
     Order.create({
       tableId,
       menuId
     })
       .then(() => {
         return res.redirect('back')
+      })
+      .catch(err =>next(err))
+  },
+  deleteOrder: (req, res, next) => {
+    const id = req.params.OrdersId
+    
+    Order.findByPk(id)
+      .then(order => {
+        if (!order) {
+          return res.redirect('back')
+        }
+        return order.destroy()
+      })
+      .then(() => {
+        res.redirect('back')
       })
       .catch(err =>next(err))
   }

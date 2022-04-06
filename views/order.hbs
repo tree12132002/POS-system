@@ -8,7 +8,9 @@
       {{#each table.Orders}}
       <div class="card-body">
         <div class="text-end">
-          <span>x</span>
+          <form action="/tables/{{this.id}}?_method=DELETE" method="POST">
+            <button type="submit" class="btn">x</button>
+          </form>
         </div>
 
         <h6 class="card-title">{{this.Menu.name}}</h6>
@@ -31,7 +33,7 @@
   <div class="col-md-8" style="outline: 1px solid steelblue;
   min-height: 600px;">
     <section class="menu">
-      <form action="/tables/:id" method="POST" class="row">
+      <form action="/tables" method="POST" class="row">
         <input type="hidden" name="tableId" id="tableId" value="{{table.id}}">
         {{#each menus}}
         <div class="col-3 mb-3">
