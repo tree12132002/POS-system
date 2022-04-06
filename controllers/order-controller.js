@@ -31,6 +31,17 @@ const orderController = {
           })
       })
       .catch(err => next(err))
+  },
+  postOrder: (req, res, next) => {
+    const { tableId, menuId } = req.body
+    Order.create({
+      tableId,
+      menuId
+    })
+      .then(() => {
+        return res.redirect('back')
+      })
+      .catch(err =>next(err))
   }
 }
 

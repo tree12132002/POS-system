@@ -5,7 +5,7 @@
       <div class="card-header">
         <h4>桌號：{{table.id}}</h1>
       </div>
-      {{#each table.Orderlists}}
+      {{#each table.Orders}}
       <div class="card-body">
         <div class="text-end">
           <span>x</span>
@@ -32,14 +32,14 @@
   min-height: 600px;">
     <section class="menu">
       <form action="/tables/:id" method="POST" class="row">
-        <input type="hidden" name="table" id="table" value="{{table.id}}">
+        <input type="hidden" name="tableId" id="tableId" value="{{table.id}}">
         {{#each menus}}
         <div class="col-3 mb-3">
           <div class="card text-center">
             <label class="card-body btn">
               <h5 class="card-title">{{this.name}}</h5>
               <p>{{this.price}}元</p>
-              <input type="radio" id="item" name="item" value="{{this.id}}">
+              <input type="radio" id="menuId" name="menuId" value="{{this.id}}">
             </label>
           </div>
         </div>

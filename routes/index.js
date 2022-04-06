@@ -7,6 +7,7 @@ const settingController = require('../controllers/setting-controller')
 // order
 router.get('/tables', orderController.getTables)
 router.get('/tables/:id', orderController.getOrder)
+router.post('/tables/:id', orderController.postOrder)
 
 // setting
 // menu
