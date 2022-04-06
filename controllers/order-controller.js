@@ -22,12 +22,18 @@ const orderController = {
         table = {
           ...table.toJSON()
         }
+        let totalAmount = 0
+        table.Orders.forEach(order => {
+          console.log(order)
+          totalAmount += order.Menu.price
+        })
+
         Menu.findAll({
           raw: true,
           nest: true
         })
           .then(menus => {
-            return res.render('order', { menus, table })
+            return res.render('order', { menus, table, totalAmount })
           })
       })
       .catch(err => next(err))
