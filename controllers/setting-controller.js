@@ -74,30 +74,52 @@ const settingController = {
       .catch(err => next(err))
   },
   getTable: (req, res, next) => {
-    Table.findAll({
-      raw: true,
-      nest: true
-    })
-      .then(tables => {
-        return res.render('table', { tables })
+    Promise.all([
+      Table.findAll({
+        raw: true,
+        nest: true
+      }),
+      req.params.id ? Table.findByPk(req.params.id, { raw: true }) : null
+    ])
+    // Table.findAll({
+    //   raw: true,
+    //   nest: true
+    // })
+      .then(([tables, table]) => {
+        return res.render('table', { tables, table })
       })
       .catch(err => next(err))
-  },
-  createTable: (req, res) => {
-    return res.render('create-table')
   },
   postTable: (req, res, next) => {
     const { name } = req.body
 
     if (!name) {
-      return res.redirect('/setting')
+      return res.redirect('back')
     }
     Table.create({
       name
     })
       .then(() => {
-        res.redirect('/setting')
+        res.redirect('back')
       })
+      .catch(err => next(err))
+  },
+  putTable: (req, res, next) => {
+    const { name } = req.body
+
+    if (!name) {
+      return res.redirect('back')
+    }
+    Table.findByPk(req.params.id)
+      .then(table => {
+        if (!table) {
+          return res.redirect('back')
+        }
+        return table.update({ name })
+      })
+      .then(() =>
+        res.redirect('/setting/table')
+      )
       .catch(err => next(err))
   }
 }

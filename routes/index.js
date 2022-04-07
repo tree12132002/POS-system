@@ -20,8 +20,9 @@ router.put('/setting/:id', settingController.putMenu)
 router.delete('/setting/:id', settingController.deleteMenu)
 // table
 router.get('/setting/table', settingController.getTable)
-router.get('/setting/table/create', settingController.createTable)
+router.get('/setting/table/:id', settingController.getTable)
 router.post('/setting/table', settingController.postTable)
+router.put('/setting/table/:id', settingController.putTable)
 
 router.use('/', (req, res) => {
   res.redirect('/tables')

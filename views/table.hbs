@@ -1,9 +1,28 @@
 <h1>Setting</h1>
 
 {{>setting-tabs route='table'}}
-<a href="/setting/table/create">
-  <button class="btn btn-primary" type="button">新增座位</button>
-</a>
+<div class="d-flex align-items-center pt-3 pb-5 my-3 text-white-50 bg-purple">
+  {{#if table}}
+  <form class="row" action="/setting/table/{{table.id}}?_method=PUT" method="POST">
+    <div class="col-auto">
+      <input class="form-control" type="text" placeholder="Enter table" value="{{table.name}}" name="name" id="name" required>
+    </div>
+    <div class="col-auto">
+      <button class="btn btn-success" type="submit">修改</button>
+      <a class="btn btn-link link-secondary" href="/setting/table">返回新增</a>
+    </div>
+  </form>
+  {{else}}
+  <form class="row" action="/setting/table" method="POST">
+    <div class="col-auto" >
+      <input class="form-control" type="text" placeholder="Enter table" name="name" id="name" required>
+    </div>
+    <div class="col-auto">
+      <button class="btn btn-success" type="submit">新增</button>
+    </div>
+  </form>
+  {{/if}}
+</div>
 <br>
 <br>
 <table class="table align-middle">
@@ -21,7 +40,7 @@
       <td>{{this.name}}</td>
       <td>
         <button type="button" class="btn btn-link">
-          <a class="btn btn-link link-primary" href="/setting/{{this.id}}/edit">
+          <a class="btn btn-link link-primary" href="/setting/table/{{this.id}}">
             Edit
           </a>
         </button>
