@@ -12,16 +12,16 @@ router.delete('/tables/:OrdersId', orderController.deleteOrder)
 
 // setting
 // menu
+router.get('/setting/menu', settingController.getSetting)
 router.get('/setting/create', settingController.createMenu)
 router.post('/setting', settingController.postMenu)
 router.get('/setting/:id/edit', settingController.editMenu)
 router.put('/setting/:id', settingController.putMenu)
 router.delete('/setting/:id', settingController.deleteMenu)
 // table
-router.get('/setting/table', settingController.createTable)
+router.get('/setting/table', settingController.getTable)
+router.get('/setting/table/create', settingController.createTable)
 router.post('/setting/table', settingController.postTable)
-
-router.get('/setting', settingController.getSetting)
 
 router.use('/', (req, res) => {
   res.redirect('/tables')

@@ -73,6 +73,16 @@ const settingController = {
       })
       .catch(err => next(err))
   },
+  getTable: (req, res, next) => {
+    Table.findAll({
+      raw: true,
+      nest: true
+    })
+      .then(tables => {
+        return res.render('table', { tables })
+      })
+      .catch(err => next(err))
+  },
   createTable: (req, res) => {
     return res.render('create-table')
   },

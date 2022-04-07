@@ -17,17 +17,17 @@ const orderController = {
     Table.findByPk(req.params.id, {
       include: [
         { model: Order, include: [Menu] }
-      ]})
+      ]
+    })
       .then(table => {
         table = {
           ...table.toJSON()
         }
         let totalAmount = 0
+
         table.Orders.forEach(order => {
-          console.log(order)
           totalAmount += order.Menu.price
         })
-
         Menu.findAll({
           raw: true,
           nest: true
@@ -51,11 +51,11 @@ const orderController = {
       .then(() => {
         return res.redirect('back')
       })
-      .catch(err =>next(err))
+      .catch(err => next(err))
   },
   deleteOrder: (req, res, next) => {
     const id = req.params.OrdersId
-    
+
     Order.findByPk(id)
       .then(order => {
         if (!order) {
@@ -66,7 +66,7 @@ const orderController = {
       .then(() => {
         res.redirect('back')
       })
-      .catch(err =>next(err))
+      .catch(err => next(err))
   }
 }
 
