@@ -121,6 +121,19 @@ const settingController = {
         res.redirect('/setting/table')
       )
       .catch(err => next(err))
+  },
+  deleteTable: (req, res, next) => {
+    Table.findByPk(req.params.id)
+      .then(table => {
+        if (!table) {
+          return res.redirect('back')
+        }
+        return table.destroy()
+      })
+      .then(() => {
+        res.redirect('/setting/table')
+      })
+      .catch(err =>next(err))
   }
 }
 
