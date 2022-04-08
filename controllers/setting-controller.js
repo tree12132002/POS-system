@@ -1,5 +1,6 @@
 const { Menu } = require('../models')
 const { Table } = require('../models')
+const { Orderlist } = require('../models')
 
 const settingController = {
   getSetting: (req, res, next) => {
@@ -127,6 +128,16 @@ const settingController = {
       })
       .then(() => {
         res.redirect('/setting/table')
+      })
+      .catch(err =>next(err))
+  },
+  getOrderlists: (req, res, next) => {
+    Orderlist.findAll({
+      raw: true,
+      nest: true
+    })
+      .then(orderlists => {
+        return res.render('orderlists', { orderlists })
       })
       .catch(err =>next(err))
   }
