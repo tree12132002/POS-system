@@ -3,7 +3,6 @@ const { Table } = require('../models')
 
 const settingController = {
   getSetting: (req, res, next) => {
-    // return res.render('setting')
     Menu.findAll({
       raw: true,
       nest: true
@@ -19,14 +18,14 @@ const settingController = {
     const { name, price } = req.body
 
     if (!name || !price) {
-      return res.redirect('/setting/create')
+      return res.redirect('back')
     }
     Menu.create({
       name,
       price
     })
       .then(() => {
-        res.redirect('setting')
+        res.redirect('/setting/menu')
       })
       .catch(err => next(err))
   },
@@ -34,7 +33,7 @@ const settingController = {
     Menu.findByPk(req.params.id, { raw: true })
       .then(menu => {
         if (!menu) {
-          return res.redirect('/setting/:id/edit')
+          return res.redirect('back')
         }
         res.render('edit-menu', { menu })
       })
@@ -43,12 +42,12 @@ const settingController = {
   putMenu: (req, res, next) => {
     const { name, price } = req.body
     if (!name || !price) {
-      return res.redirect('/setting/:id/edit')
+      return res.redirect('back')
     }
     Menu.findByPk(req.params.id)
       .then(menu => {
         if (!menu) {
-          return res.redirect('/setting/:id/edit')
+          return res.redirect('back')
         }
         return menu.update({
           name,
@@ -56,7 +55,7 @@ const settingController = {
         })
       })
       .then(() => {
-        res.redirect('/setting')
+        res.redirect('/setting/menu')
       })
       .catch(err => next(err))
   },
@@ -64,12 +63,12 @@ const settingController = {
     Menu.findByPk(req.params.id)
       .then(menu => {
         if (!menu) {
-          return res.redirect('/setting/:id/edit')
+          return res.redirect('back')
         }
         return menu.destroy()
       })
       .then(() => {
-        res.redirect('/setting')
+        res.redirect('/setting/menu')
       })
       .catch(err => next(err))
   },
@@ -81,10 +80,6 @@ const settingController = {
       }),
       req.params.id ? Table.findByPk(req.params.id, { raw: true }) : null
     ])
-    // Table.findAll({
-    //   raw: true,
-    //   nest: true
-    // })
       .then(([tables, table]) => {
         return res.render('table', { tables, table })
       })
@@ -100,7 +95,7 @@ const settingController = {
       name
     })
       .then(() => {
-        res.redirect('back')
+        res.redirect('/setting/table')
       })
       .catch(err => next(err))
   },

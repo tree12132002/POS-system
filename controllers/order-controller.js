@@ -1,6 +1,7 @@
 const { Menu } = require('../models')
 const { Table } = require('../models')
 const { Order } = require('../models')
+const { Orderlist } = require('../models')
 
 const orderController = {
   getTables: (req, res, next) => {
@@ -65,6 +66,40 @@ const orderController = {
       })
       .then(() => {
         res.redirect('back')
+      })
+      .catch(err => next(err))
+  },
+  postCheckout: (req, res, next) => {
+    const { tableId } = req.body
+
+    Table.findByPk(tableId, {
+      include: [
+        { model: Order, include: [Menu] }
+      ]
+    })
+      .then(table =>{
+        table = {
+          ...table.toJSON()
+        }
+        let items = []
+        let totalAmount = 0
+
+        table.Orders.forEach(order => {
+          items.push(order.Menu.name)
+          totalAmount += order.Menu.price
+        })
+        Orderlist.create({
+          ordered_items: items.toString(),
+          total_price: totalAmount
+        })
+        Order.destroy({
+          where: {
+            table_id: tableId
+          }
+        })
+      })
+      .then(() => {
+        return res.redirect('/tables')
       })
       .catch(err => next(err))
   }

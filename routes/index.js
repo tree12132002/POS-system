@@ -9,15 +9,16 @@ router.get('/tables', orderController.getTables)
 router.get('/tables/:id', orderController.getOrder)
 router.post('/tables', orderController.postOrder)
 router.delete('/tables/:OrdersId', orderController.deleteOrder)
+router.post('/tables/checkout', orderController.postCheckout)
 
 // setting
 // menu
 router.get('/setting/menu', settingController.getSetting)
-router.get('/setting/create', settingController.createMenu)
-router.post('/setting', settingController.postMenu)
-router.get('/setting/:id/edit', settingController.editMenu)
-router.put('/setting/:id', settingController.putMenu)
-router.delete('/setting/:id', settingController.deleteMenu)
+router.get('/setting/menu/create', settingController.createMenu)
+router.post('/setting/menu', settingController.postMenu)
+router.get('/setting/menu/:id/edit', settingController.editMenu)
+router.put('/setting/menu/:id', settingController.putMenu)
+router.delete('/setting/menu/:id', settingController.deleteMenu)
 // table
 router.get('/setting/table', settingController.getTable)
 router.get('/setting/table/:id', settingController.getTable)

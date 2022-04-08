@@ -1,7 +1,7 @@
 <h1>Setting</h1>
 
 {{>setting-tabs route='menu'}}
-<a href="/setting/create">
+<a href="/setting/menu/create">
   <button class="btn btn-primary" type="button">新增餐點</button>
 </a>
 <br>
@@ -23,11 +23,11 @@
       <td>{{this.price}}</td>
       <td>
         <button type="button" class="btn btn-link">
-          <a class="btn btn-link link-primary" href="/setting/{{this.id}}/edit">
+          <a class="btn btn-link link-primary" href="/setting/menu/{{this.id}}/edit">
             Edit
           </a>
         </button>
-        <form action="/setting/{{this.id}}?_method=DELETE" method="POST" style="display: inline;">
+        <form action="/setting/menu/{{this.id}}?_method=DELETE" method="POST" style="display: inline;">
           <button type="submit" class="btn btn-link link danger" onclick="return confirm(`確定要刪除 {{ this.name }} 嗎？`)">Delete</button>
         </form>
       </td>
