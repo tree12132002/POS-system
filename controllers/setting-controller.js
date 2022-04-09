@@ -1,6 +1,7 @@
 const { Menu } = require('../models')
 const { Table } = require('../models')
 const { Orderlist } = require('../models')
+const moment = require('moment')
 
 const settingController = {
   getSetting: (req, res, next) => {
@@ -137,9 +138,26 @@ const settingController = {
       nest: true
     })
       .then(orderlists => {
+        orderlists.forEach(orderlist => {
+          orderlist.createdAt = moment(orderlist.createdAt).format('YYYY-MM-DD-h:mm:ss')
+        })
         return res.render('orderlists', { orderlists })
       })
       .catch(err =>next(err))
+  },
+  getOrderlist: (req, res, next) => {
+    Orderlist.findByPk(req.params.id)
+      .then(orderlist => {
+        orderlist = {
+          ...orderlist.toJSON()
+        }
+        orderlist.createdAt = moment(orderlist.createdAt).format('YYYY-MM-DD-h:mm:ss')
+        
+        const items = orderlist.ordered_items.split(',')
+
+        return res.render('orderlist', { orderlist, items })
+      })
+      .catch(err => next(err))
   }
 }
 

@@ -27,6 +27,7 @@ router.put('/setting/table/:id', settingController.putTable)
 router.delete('/setting/table/:id', settingController.deleteTable)
 // orderlist
 router.get('/setting/orderlists', settingController.getOrderlists)
+router.get('/setting/orderlists/:id', settingController.getOrderlist)
 
 router.use('/', (req, res) => {
   res.redirect('/tables')

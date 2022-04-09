@@ -1,0 +1,35 @@
+<h1>訂單內容#{{orderlist.id}}</h1>
+
+<br>
+<br>
+<table class="table align-middle">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">items</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each items}}
+    <tr>
+      <td>{{this}}</td>
+    </tr>
+    {{/each}}
+  </tbody>
+</table>
+<br>
+<br>
+<table class="table align-middle">
+  <thead class="thed-dark">
+    <tr>
+      <th scope="col">Total price</th>
+      <th scope="col">Checkout time</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>{{orderlist.total_price}}</td>
+      <td>{{orderlist.createdAt}}</td>
+    </tr>
+  </tbody>
+</table>
+<a class="btn btn-outline-secondary" href="javascript:history.back()">Back</a>
