@@ -158,6 +158,19 @@ const settingController = {
         return res.render('orderlist', { orderlist, items })
       })
       .catch(err => next(err))
+  },
+  deleteOrderlist: (req, res, next) => {
+    Orderlist.findByPk(req.params.id)
+      .then(orderlist => {
+        if (!orderlist) {
+          return res.redirect('back')
+        }
+        return orderlist.destroy()
+      })
+      .then(() => {
+        res.redirect('/setting/orderlists')
+      })
+      .catch(err =>next(err))
   }
 }
 
