@@ -240,6 +240,19 @@ const settingController = {
         res.redirect('/setting/categories')
       })
       .catch(err => next(err))
+  },
+  deleteCategory: (req, res, next) => {
+    Category.findByPk(req.params.id)
+      .then(category => {
+        if (!category) {
+          return res.redirect('back')
+        }
+        return category.destroy()
+      })
+      .then(() => {
+        res.redirect('/setting/categories')
+      })
+      .catch(err => next(err))
   }
 }
 
