@@ -1,0 +1,56 @@
+<h1>Setting</h1>
+
+{{>setting-tabs route='categories'}}
+<div class="d-flex align-items-center pt-3 pb-5 my-3 text-white-50 bg-purple">
+  {{#if category}}
+  <form class="row" action="/setting/categories/{{category.id}}?_method=PUT" method="POST">
+    <div class="col-auto">
+      <input class="form-control" type="text" placeholder="Enter Category Name" value="{{category.name}}" name="name"
+        id="name" required>
+    </div>
+    <div class="col-auto">
+      <button class="btn btn-success" type="submit">修改</button>
+      <a class="btn btn-link link-secondary" href="/setting/categories">返回新增</a>
+    </div>
+  </form>
+  {{else}}
+  <form class="row" action="/setting/categories" method="POST">
+    <div class="col-auto">
+      <input class="form-control" type="text" placeholder="Enter category" name="name" id="name" required>
+    </div>
+    <div class="col-auto">
+      <button class="btn btn-success" type="submit">新增</button>
+    </div>
+  </form>
+  {{/if}}
+</div>
+<br>
+<br>
+<table class="table align-middle">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">name</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each categories}}
+    <tr>
+      <th scope="row">{{this.id}}</th>
+      <td>{{this.name}}</td>
+      <td>
+        <button type="button" class="btn btn-link">
+          <a class="btn btn-link link-primary" href="/setting/categories/{{this.id}}">
+            Edit
+          </a>
+        </button>
+        <form action="/setting/categories/{{this.id}}?_method=DELETE" method="POST" style="display: inline;">
+          <button type="submit" class="btn btn-link link danger"
+            onclick="return confirm(`確定要刪除 {{ this.name }} 嗎？`)">Delete</button>
+        </form>
+      </td>
+    </tr>
+    {{/each}}
+  </tbody>
+</table>

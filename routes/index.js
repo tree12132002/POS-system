@@ -25,6 +25,8 @@ router.get('/setting/table/:id', settingController.getTable)
 router.post('/setting/table', settingController.postTable)
 router.put('/setting/table/:id', settingController.putTable)
 router.delete('/setting/table/:id', settingController.deleteTable)
+// categories
+router.get('/setting/categories', settingController.getCategories)
 // orderlist
 router.get('/setting/orderlists', settingController.getOrderlists)
 router.get('/setting/orderlists/:id', settingController.getOrderlist)

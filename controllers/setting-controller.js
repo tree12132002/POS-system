@@ -1,13 +1,17 @@
-const { Menu } = require('../models')
-const { Table } = require('../models')
-const { Orderlist } = require('../models')
+const {
+  Menu,
+  Table,
+  Orderlist,
+  Category
+} = require('../models')
 const moment = require('moment')
 
 const settingController = {
   getSetting: (req, res, next) => {
     Menu.findAll({
       raw: true,
-      nest: true
+      nest: true,
+      include: [Category]
     })
       .then(menus =>
         res.render('setting', { menus }))
@@ -169,6 +173,19 @@ const settingController = {
       })
       .then(() => {
         res.redirect('/setting/orderlists')
+      })
+      .catch(err => next(err))
+  },
+  getCategories: (req, res, next) => {
+    Promise.all([
+      Category.findAll({
+        raw: true,
+        nest: true
+      }),
+      req.params.id ? Category.findByPk(req.params.id, { raw: true }) : null
+    ])
+      .then(([categories, category]) => {
+        return res.render('categories', { categories, category })
       })
       .catch(err => next(err))
   }
