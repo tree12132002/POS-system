@@ -222,6 +222,24 @@ const settingController = {
         return res.redirect('back')
       })
       .catch(err => next(err))
+  },
+  putCategory: (req, res, next) => {
+    const { name } = req.body
+
+    if (!name) {
+      return res.redirect('back')
+    }
+    Category.findByPk(req.params.id)
+      .then(category => {
+        if (!category) {
+          return res.redirect('back')
+        }
+        return category.update({ name })
+      })
+      .then(() => {
+        res.redirect('/setting/categories')
+      })
+      .catch(err => next(err))
   }
 }
 
