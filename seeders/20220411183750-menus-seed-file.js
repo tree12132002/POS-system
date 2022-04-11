@@ -27,7 +27,7 @@ module.exports = {
       updated_at: new Date()
     }, {
       id: 3,
-      name: '雞蛋沙拉照燒醬章魚燒',
+      name: '雞蛋沙拉章魚燒',
       price: 150,
       category_id: 1,
       created_at: new Date(),

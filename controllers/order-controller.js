@@ -1,7 +1,10 @@
-const { Menu } = require('../models')
-const { Table } = require('../models')
-const { Order } = require('../models')
-const { Orderlist } = require('../models')
+const {
+  Menu,
+  Table,
+  Order,
+  Orderlist,
+  Category
+} = require('../models')
 
 const orderController = {
   getTables: (req, res, next) => {
@@ -15,12 +18,28 @@ const orderController = {
       .catch(err => next(err))
   },
   getOrder: (req, res, next) => {
-    Table.findByPk(req.params.id, {
-      include: [
-        { model: Order, include: [Menu] }
-      ]
-    })
-      .then(table => {
+    const categoryId = Number(req.query.categoryId) || ''
+
+    Promise.all([
+      Table.findByPk(req.params.id, {
+        include: [
+          { model: Order, include: [Menu] }
+        ]
+      }),
+      Category.findAll({
+        raw: true,
+        nest: true
+      }),
+      Menu.findAll({
+        include: Category,
+        where: {
+          ...categoryId ? { categoryId } : {}
+        },
+        raw: true,
+        nest: true
+      })
+    ])
+      .then(([table, categories, menus]) => {
         table = {
           ...table.toJSON()
         }
@@ -29,13 +48,7 @@ const orderController = {
         table.Orders.forEach(order => {
           totalAmount += order.Menu.price
         })
-        Menu.findAll({
-          raw: true,
-          nest: true
-        })
-          .then(menus => {
-            return res.render('order', { menus, table, totalAmount })
-          })
+        return res.render('order', { table, categories, menus, totalAmount, categoryId })
       })
       .catch(err => next(err))
   },
