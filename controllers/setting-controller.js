@@ -153,7 +153,7 @@ const settingController = {
         }
         orderlist.createdAt = moment(orderlist.createdAt).format('YYYY-MM-DD-h:mm:ss')
         
-        const items = orderlist.ordered_items.split(',')
+        const items = orderlist.orderedItems.split(',')
 
         return res.render('orderlist', { orderlist, items })
       })

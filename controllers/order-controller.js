@@ -89,8 +89,8 @@ const orderController = {
           totalAmount += order.Menu.price
         })
         Orderlist.create({
-          ordered_items: items.toString(),
-          total_price: totalAmount
+          orderedItems: items.toString(),
+          totalPrice: totalAmount
         })
         Order.destroy({
           where: {

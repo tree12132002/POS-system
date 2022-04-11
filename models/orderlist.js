@@ -14,8 +14,8 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Orderlist.init({
-    ordered_items: DataTypes.STRING,
-    total_price: DataTypes.INTEGER
+    orderedItems: DataTypes.STRING,
+    totalPrice: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'Orderlist',

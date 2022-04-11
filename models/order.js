@@ -20,8 +20,8 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Order.init({
-    table_id: DataTypes.INTEGER,
-    menu_id: DataTypes.INTEGER
+    tableId: DataTypes.INTEGER,
+    menuId: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'Order',
