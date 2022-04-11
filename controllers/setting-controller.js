@@ -17,18 +17,26 @@ const settingController = {
         res.render('setting', { menus }))
       .catch(err => next(err))
   },
-  createMenu: (req, res) => {
-    return res.render('create-menu')
+  createMenu: (req, res, next) => {
+    Category.findAll({
+      raw: true,
+      nest: true
+    })
+      .then(categories => {
+        return res.render('create-menu', { categories })
+      })
+      .catch(err => next(err))
   },
   postMenu: (req, res, next) => {
-    const { name, price } = req.body
+    const { name, price, categoryId } = req.body
 
-    if (!name || !price) {
+    if (!name || !price, !categoryId) {
       return res.redirect('back')
     }
     Menu.create({
       name,
-      price
+      price,
+      categoryId
     })
       .then(() => {
         res.redirect('/setting/menu')
@@ -36,18 +44,29 @@ const settingController = {
       .catch(err => next(err))
   },
   editMenu: (req, res, next) => {
-    Menu.findByPk(req.params.id, { raw: true })
-      .then(menu => {
+    Promise.all([
+      Menu.findByPk(req.params.id, {
+        raw: true,
+        nest: true
+      }),
+      Category.findAll({
+        raw: true,
+        nest: true
+      })
+    ])
+
+      .then(([menu, categories]) => {
         if (!menu) {
           return res.redirect('back')
         }
-        res.render('edit-menu', { menu })
+        res.render('edit-menu', { menu, categories })
       })
       .catch(err => next(err))
   },
   putMenu: (req, res, next) => {
-    const { name, price } = req.body
-    if (!name || !price) {
+    const { name, price, categoryId } = req.body
+
+    if (!name || !price || !categoryId) {
       return res.redirect('back')
     }
     Menu.findByPk(req.params.id)
@@ -57,7 +76,8 @@ const settingController = {
         }
         return menu.update({
           name,
-          price
+          price,
+          categoryId
         })
       })
       .then(() => {
