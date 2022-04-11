@@ -208,6 +208,20 @@ const settingController = {
         return res.render('categories', { categories, category })
       })
       .catch(err => next(err))
+  },
+  postCategory: (req, res, next) => {
+    const { name } = req.body
+
+    if (!name) {
+      return res.redirect('back')
+    }
+    Category.create({
+      name
+    })
+      .then(() => {
+        return res.redirect('back')
+      })
+      .catch(err => next(err))
   }
 }
 
