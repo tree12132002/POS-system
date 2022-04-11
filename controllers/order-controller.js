@@ -77,11 +77,11 @@ const orderController = {
         { model: Order, include: [Menu] }
       ]
     })
-      .then(table =>{
+      .then(table => {
         table = {
           ...table.toJSON()
         }
-        let items = []
+        const items = []
         let totalAmount = 0
 
         table.Orders.forEach(order => {

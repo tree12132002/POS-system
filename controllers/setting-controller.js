@@ -130,7 +130,7 @@ const settingController = {
       .then(() => {
         res.redirect('/setting/table')
       })
-      .catch(err =>next(err))
+      .catch(err => next(err))
   },
   getOrderlists: (req, res, next) => {
     Orderlist.findAll({
@@ -143,7 +143,7 @@ const settingController = {
         })
         return res.render('orderlists', { orderlists })
       })
-      .catch(err =>next(err))
+      .catch(err => next(err))
   },
   getOrderlist: (req, res, next) => {
     Orderlist.findByPk(req.params.id)
@@ -152,7 +152,7 @@ const settingController = {
           ...orderlist.toJSON()
         }
         orderlist.createdAt = moment(orderlist.createdAt).format('YYYY-MM-DD-h:mm:ss')
-        
+
         const items = orderlist.orderedItems.split(',')
 
         return res.render('orderlist', { orderlist, items })
@@ -170,7 +170,7 @@ const settingController = {
       .then(() => {
         res.redirect('/setting/orderlists')
       })
-      .catch(err =>next(err))
+      .catch(err => next(err))
   }
 }
 
