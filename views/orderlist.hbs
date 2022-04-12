@@ -5,22 +5,31 @@
 <table class="table align-middle">
   <thead class="table-dark">
     <tr>
-      <th scope="col">桌號</th>
-      <th scope="col">人數</th>
+      <th scope="col"></th>
+      <th scope="col">訂單明細</th>
+      <th scope="col"></th>
     </tr>
   </thead>
   <tbody>
     <tr>
+      <td>桌號</td>
+      <td></td>
       <td>{{orderlist.tableId}}</td>
+    </tr>
+    <tr>
+      <td>人數</td>
+      <td></td>
       <td>{{orderlist.peopleAmount}}</td>
     </tr>
+    <tr>
+      <td>結帳時間</td>
+      <td></td>
+      <td>{{orderlist.createdAt}}</td>
+    </tr>
   </tbody>
-</table>
-<br>
-<br>
-<table class="table align-middle">
   <thead class="table-dark">
     <tr>
+      <th scope="col"></th>
       <th scope="col">品項</th>
       <th scope="col">金額</th>
     </tr>
@@ -28,26 +37,20 @@
   <tbody>
     {{#each eachItemPrice}}
     <tr>
+      <td></td>
       <td>{{this.name}}</td>
       <td>{{this.price}}</td>
     </tr>
     {{/each}}
   </tbody>
-</table>
-<br>
-<br>
-<table class="table align-middle">
-  <thead class="table-dark">
-    <tr>
-      <th scope="col">總金額</th>
-      <th scope="col">結帳時間</th>
-    </tr>
-  </thead>
   <tbody>
     <tr>
+      <td>總金額</td>
+      <td></td>
       <td>{{orderlist.totalPrice}}</td>
-      <td>{{orderlist.createdAt}}</td>
     </tr>
   </tbody>
 </table>
-<a class="btn btn-outline-secondary" href="javascript:history.back()">返回</a>
+<br>
+<br>
+<a class="btn btn-outline-secondary mb-3" href="javascript:history.back()">返回</a>

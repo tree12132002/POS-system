@@ -159,7 +159,8 @@ const settingController = {
   getOrderlists: (req, res, next) => {
     Orderlist.findAll({
       raw: true,
-      nest: true
+      nest: true,
+      order: [['createdAt', 'DESC']]
     })
       .then(orderlists => {
         orderlists.forEach(orderlist => {

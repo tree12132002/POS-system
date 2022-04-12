@@ -20,10 +20,15 @@
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="/tables">點餐首頁</a>
+              <a class="nav-link" aria-current="page" href="/tables">點餐首頁</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="/setting/menu">後台設定</a>
+            </li>
+            <li class="nav-item">
+              <!-- Button trigger modal -->
+              <button class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#report">日結報表
+              </button>
             </li>
           </ul>
         </div>
@@ -34,6 +39,33 @@
     <div class="pt-5">
       <div class="container">
         {{{body}}}
+        <!-- Modal -->
+        <div class="modal fade" id="report" tabindex="-1" aria-labelledby="report" aria-hidden="true">
+          <div class="modal-dialog">
+            <form action="/report" method="POST">
+              <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="report">日結報表</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <h5>選擇時段：</h5>
+                  <label for="startTime">從
+                    <input type="datetime-local" class="form-control" name="startTime" id="startTime" placeholder="From when" required>
+                  </label>
+                
+                  <label for="endTime">至
+                    <input type="datetime-local" class="form-control" name="endTime" id="endTime" placeholder="To when">
+                  </label>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                <button type="submit" class="btn btn-primary">送出</button>
+              </div>
+              </div>
+            </form>>
+          </div>
+        </div>
       </div>
     </div>
   </main>

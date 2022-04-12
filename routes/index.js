@@ -3,6 +3,7 @@ const router = express.Router()
 
 const orderController = require('../controllers/order-controller')
 const settingController = require('../controllers/setting-controller')
+const reportController = require('../controllers/report-controller')
 
 // order
 router.get('/tables', orderController.getTables)
@@ -36,6 +37,9 @@ router.delete('/setting/categories/:id', settingController.deleteCategory)
 router.get('/setting/orderlists', settingController.getOrderlists)
 router.get('/setting/orderlists/:id', settingController.getOrderlist)
 router.delete('/setting/orderlists/:id', settingController.deleteOrderlist)
+
+// report
+router.post('/report', reportController.postReport)
 
 router.use('/', (req, res) => {
   res.redirect('/tables')
