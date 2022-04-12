@@ -1,17 +1,35 @@
-<h1>訂單內容#{{orderlist.id}}</h1>
+<h1>訂單編號：#{{orderlist.id}}</h1>
 
 <br>
 <br>
 <table class="table align-middle">
-  <thead class="thead-dark">
+  <thead class="table-dark">
     <tr>
-      <th scope="col">items</th>
+      <th scope="col">桌號</th>
+      <th scope="col">人數</th>
     </tr>
   </thead>
   <tbody>
-    {{#each items}}
     <tr>
-      <td>{{this}}</td>
+      <td>{{orderlist.tableId}}</td>
+      <td>{{orderlist.peopleAmount}}</td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<br>
+<table class="table align-middle">
+  <thead class="table-dark">
+    <tr>
+      <th scope="col">品項</th>
+      <th scope="col">金額</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each eachItemPrice}}
+    <tr>
+      <td>{{this.name}}</td>
+      <td>{{this.price}}</td>
     </tr>
     {{/each}}
   </tbody>
@@ -19,10 +37,10 @@
 <br>
 <br>
 <table class="table align-middle">
-  <thead class="thed-dark">
+  <thead class="table-dark">
     <tr>
-      <th scope="col">Total price</th>
-      <th scope="col">Checkout time</th>
+      <th scope="col">總金額</th>
+      <th scope="col">結帳時間</th>
     </tr>
   </thead>
   <tbody>
@@ -32,4 +50,4 @@
     </tr>
   </tbody>
 </table>
-<a class="btn btn-outline-secondary" href="javascript:history.back()">Back</a>
+<a class="btn btn-outline-secondary" href="javascript:history.back()">返回</a>

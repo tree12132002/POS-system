@@ -1,14 +1,12 @@
-<h1>Setting</h1>
-
 {{>setting-tabs route='orderlists'}}
 <br>
 <br>
 <table class="table align-middle">
-  <thead class="thead-dark">
+  <thead class="table-dark">
     <tr>
       <th scope="col">#</th>
-      <th scope="col">checkout time</th>
-      <th scope="col">Price</th>
+      <th scope="col">結帳時間</th>
+      <th scope="col">金額</th>
       <th scope="col"></th>
     </tr>
   </thead>
@@ -21,12 +19,12 @@
       <td>
         <button type="button" class="btn btn-link">
           <a class="btn btn-link link-primary" href="/setting/orderlists/{{this.id}}">
-            Details
+            細項
           </a>
         </button>
         <form action="/setting/orderlists/{{this.id}}?_method=DELETE" method="POST" style="display: inline;">
           <button type="submit" class="btn btn-link link danger"
-            onclick="return confirm(`確定要刪除這筆紀錄嗎？`)">Delete</button>
+            onclick="return confirm(`確定要刪除這筆紀錄嗎？`)">刪除</button>
         </form>
       </td>
     </tr>

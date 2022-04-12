@@ -1,14 +1,14 @@
 <div class="form-row mb-3">
-  <label class="form-label" for="name">Name</label>
+  <label class="form-label" for="name">品項</label>
   <input class="form-control" type="text" name="name" id="name" placeholder="Enter name" value="{{menu.name}}" required>
 </div>
 <div class="form-row mb-3">
-  <label class="form-label" for="price">Price</label>
+  <label class="form-label" for="price">金額</label>
   <input class="form-control" type="number" name="price" id="price" placeholder="Enter price" min="0"
     value="{{menu.price}}" required>
 </div>
 <div class="form-row mb-3">
-  <label class="form-label" for="categoryId">Category</label>
+  <label class="form-label" for="categoryId">類別</label>
   <select class="form-control" id="categoryId" name="categoryId">
     {{#each categories}}
     <option value="{{this.id}}" {{#ifCond this.id ../menu.categoryId}} selected {{/ifCond}}>

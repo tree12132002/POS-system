@@ -178,8 +178,12 @@ const settingController = {
         orderlist.createdAt = moment(orderlist.createdAt).format('YYYY-MM-DD-h:mm:ss')
 
         const items = orderlist.orderedItems.split(',')
-
-        return res.render('orderlist', { orderlist, items })
+        const prices = orderlist.orderedPrices.split(',')
+        const eachItemPrice = items.map((elem, index) => ({
+          name: elem,
+          price: prices[index]
+        }))
+        return res.render('orderlist', { orderlist, eachItemPrice })
       })
       .catch(err => next(err))
   },

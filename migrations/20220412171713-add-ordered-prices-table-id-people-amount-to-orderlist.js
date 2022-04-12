@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 
 module.exports = {
   async up (queryInterface, Sequelize) {
@@ -10,15 +10,15 @@ module.exports = {
      */
     await queryInterface.addColumn('Orderlists', 'people_amount', {
       type: Sequelize.INTEGER,
-      allowNull: false,
+      allowNull: false
     })
     await queryInterface.addColumn('Orderlists', 'ordered_prices', {
       type: Sequelize.STRING,
-      allowNull: false,
+      allowNull: false
     })
     await queryInterface.addColumn('Orderlists', 'table_id', {
       type: Sequelize.INTEGER,
-      allowNull: false,
+      allowNull: false
     })
   },
 
@@ -33,4 +33,4 @@ module.exports = {
     await queryInterface.removeColumn('Orderlists', 'ordered_prices')
     await queryInterface.removeColumn('Orderlists', 'table_id')
   }
-};
+}
