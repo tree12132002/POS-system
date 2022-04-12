@@ -90,24 +90,30 @@ const orderController = {
 
     Table.findByPk(tableId, {
       include: [
-        { model: Order, include: [Menu] }
+        { model: Order, include: [Menu] },
+        { model: Person }
       ]
     })
       .then(table => {
         table = {
           ...table.toJSON()
         }
-        const items = []
+        const itemlist = []
+        const pricelist = []
         let totalAmount = 0
 
         table.Orders.forEach(order => {
-          items.push(order.Menu.name)
+          itemlist.push(order.Menu.name)
+          pricelist.push(order.Menu.price)
           totalAmount += order.Menu.price
         })
         Promise.all([
           Orderlist.create({
-            orderedItems: items.toString(),
-            totalPrice: totalAmount
+            orderedItems: itemlist.toString(),
+            orderedPrices: pricelist.toString(),
+            totalPrice: totalAmount,
+            peopleAmount: table.Person.amount,
+            tableId
           }),
           Order.destroy({
             where: {
