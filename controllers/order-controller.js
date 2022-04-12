@@ -3,12 +3,14 @@ const {
   Table,
   Order,
   Orderlist,
-  Category
+  Category,
+  Person
 } = require('../models')
 
 const orderController = {
   getTables: (req, res, next) => {
     Table.findAll({
+      include: [Person],
       raw: true,
       nest: true
     })
@@ -23,7 +25,8 @@ const orderController = {
     Promise.all([
       Table.findByPk(req.params.id, {
         include: [
-          { model: Order, include: [Menu] }
+          { model: Order, include: [Menu] },
+          { model: Person }
         ]
       }),
       Category.findAll({
@@ -101,18 +104,40 @@ const orderController = {
           items.push(order.Menu.name)
           totalAmount += order.Menu.price
         })
-        Orderlist.create({
-          orderedItems: items.toString(),
-          totalPrice: totalAmount
-        })
-        Order.destroy({
-          where: {
-            table_id: tableId
-          }
-        })
+        Promise.all([
+          Orderlist.create({
+            orderedItems: items.toString(),
+            totalPrice: totalAmount
+          }),
+          Order.destroy({
+            where: {
+              table_id: tableId
+            }
+          }),
+          Person.destroy({
+            where: {
+              table_id: tableId
+            }
+          })
+        ])
       })
       .then(() => {
         return res.redirect('/tables')
+      })
+      .catch(err => next(err))
+  },
+  postPeople: (req, res, next) => {
+    const { tableId, amount } = req.body
+
+    if (!tableId || !amount) {
+      return res.redirect
+    }
+    Person.create({
+      tableId,
+      amount
+    })
+      .then(() => {
+        return res.redirect('back')
       })
       .catch(err => next(err))
   }

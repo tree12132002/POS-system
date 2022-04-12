@@ -3,8 +3,35 @@
   <div class="card text-center m-3 col-2">
     <div class="card-body">
       <h5 class="card-title">桌號：{{this.name}}</h5>
-      <p class="card-text">要點餐嗎？</p>
+      {{#if this.Person.amount}}
+      <p>用餐人數：{{this.Person.amount}}</p>
       <a href="/tables/{{this.id}}" class="btn btn-primary">點餐</a>
+      {{else}}
+      <!-- Button trigger modal -->
+      <p>閒置</p>
+      <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modal{{this.id}}">開桌</button>
+      {{/if}}
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="modal{{this.id}}" tabindex="-1" aria-labelledby="modal{{this.id}}" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">用餐人數</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <form action="/tables/{{this.id}}" method="POST">
+            <div class="modal-body p-5">
+              <input type="hidden" name="tableId" id="tableId" value="{{this.id}}">
+              <input type="number" class="form-control" name="amount" id="amount" placeholder="Enter Amount">
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+              <button type="submit" class="btn btn-primary">完成</button>
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
   </div>
   {{/each}}

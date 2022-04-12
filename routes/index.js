@@ -10,6 +10,7 @@ router.get('/tables/:id', orderController.getOrder)
 router.post('/tables', orderController.postOrder)
 router.delete('/tables/:OrdersId', orderController.deleteOrder)
 router.post('/tables/checkout', orderController.postCheckout)
+router.post('/tables/:id', orderController.postPeople)
 
 // setting
 // menu
