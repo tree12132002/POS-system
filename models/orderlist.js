@@ -15,10 +15,14 @@ module.exports = (sequelize, DataTypes) => {
   }
   Orderlist.init({
     orderedItems: DataTypes.STRING,
-    totalPrice: DataTypes.INTEGER
+    totalPrice: DataTypes.INTEGER,
+    orderedPrices: DataTypes.STRING,
+    peopleAmount: DataTypes.INTEGER,
+    tableId: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'Orderlist',
+    tableName: 'Orderlists',
     underscored: true
   })
   return Orderlist
