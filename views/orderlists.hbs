@@ -6,6 +6,7 @@
     <tr>
       <th scope="col">#</th>
       <th scope="col">結帳時間</th>
+      <th scope="col">支付方式</th>
       <th scope="col">金額</th>
       <th scope="col"></th>
     </tr>
@@ -15,6 +16,7 @@
     <tr>
       <th scope="row">{{this.id}}</th>
       <td>{{this.createdAt}}</td>
+      <td>{{this.payment}}</td>
       <td>{{this.totalPrice}}</td>
       <td>
         <button type="button" class="btn btn-link">
@@ -23,8 +25,7 @@
           </a>
         </button>
         <form action="/setting/orderlists/{{this.id}}?_method=DELETE" method="POST" style="display: inline;">
-          <button type="submit" class="btn btn-link link danger"
-            onclick="return confirm(`確定要刪除這筆紀錄嗎？`)">刪除</button>
+          <button type="submit" class="btn btn-link link danger" onclick="return confirm(`確定要刪除這筆紀錄嗎？`)">刪除</button>
         </form>
       </td>
     </tr>

@@ -1,9 +1,9 @@
 <table class="table align-middle">
   <thead class="table-dark">
     <tr>
-      <th scope="col"></th>
-      <th scope="col">訂單統計</th>
-      <th scope="col"></th>
+      <th scope="col" style="width: 33%;"></th>
+      <th scope="col" style="width: 33%;">訂單統計</th>
+      <th scope="col" style="width: 33%;"></th>
     </tr>
   </thead>
   <tbody>
@@ -17,17 +17,51 @@
       <td>{{orderlists.length}}</td>
       <td>{{dailyAmount}}</td>
     </tr>
-    <tbody>
-      <tr>
-        <td>客流量</td>
-        <td></td>
-        <td>{{dailyCustomers}}</td>
-      </tr>
-      <tr>
-        <td>客單價</td>
-        <td></td>
-        <td>{{averageOrderValue}}</td>
-      </tr>
-    </tbody>
+  </tbody>
+  <thead class="table-dark">
+    <tr>
+      <th scope="col"></th>
+      <th scope="col">收款統計</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>現金</td>
+      <td></td>
+      <td>{{cashAmount}}</td>
+    </tr>
+    <tr>
+      <td>刷卡</td>
+      <td></td>
+      <td>{{cardAmount}}</td>
+    </tr>
+    <tr>
+      <td>外帶</td>
+      <td></td>
+      <td>{{takeoutAmount}}</td>
+    </tr>
+    <tr>
+      <td>UberEats</td>
+      <td></td>
+      <td>{{uberAmount}}</td>
+    </tr>
+  </tbody>
+  <tbody>
+    <tr>
+      <td>平均每單消費額</td>
+      <td></td>
+      <td>{{averageTableValue}}</td>
+    </tr>
+    <tr>
+      <td>客流量</td>
+      <td></td>
+      <td>{{dailyCustomers}}</td>
+    </tr>
+    <tr>
+      <td>客單價</td>
+      <td></td>
+      <td>{{averageOrderValue}}</td>
+    </tr>
   </tbody>
 </table>

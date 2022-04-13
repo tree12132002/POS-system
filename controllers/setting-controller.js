@@ -30,7 +30,7 @@ const settingController = {
   postMenu: (req, res, next) => {
     const { name, price, categoryId } = req.body
 
-    if (!name || !price, !categoryId) {
+    if (!name || !price || !categoryId) {
       return res.redirect('back')
     }
     Menu.create({
