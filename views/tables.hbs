@@ -23,7 +23,7 @@
           <form action="/tables/{{this.id}}" method="POST">
             <div class="modal-body p-5">
               <input type="hidden" name="tableId" id="tableId" value="{{this.id}}">
-              <input type="number" class="form-control" name="amount" id="amount" placeholder="Enter Amount">
+              <input type="number" class="form-control" name="amount" id="amount" min="1" placeholder="Enter Amount">
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>

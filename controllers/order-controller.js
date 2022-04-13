@@ -86,7 +86,7 @@ const orderController = {
       .catch(err => next(err))
   },
   postCheckout: (req, res, next) => {
-    const { tableId } = req.body
+    const { tableId, payment } = req.body
 
     Table.findByPk(tableId, {
       include: [
@@ -113,7 +113,8 @@ const orderController = {
             orderedPrices: pricelist.toString(),
             totalPrice: totalAmount,
             peopleAmount: table.Person.amount,
-            tableId
+            tableId,
+            payment
           }),
           Order.destroy({
             where: {

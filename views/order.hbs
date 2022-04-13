@@ -3,8 +3,8 @@
   <div class="col-md-4">
     <div class="card">
       <div class="card-header d-flex justify-content-between">
-        <h4>桌號：{{table.name}}</h1>
-          <h4>人數：{{table.Person.amount}}</h1>
+        <h4>桌號：{{table.name}}</h4>
+        <h4>人數：{{table.Person.amount}}</h4>
       </div>
       {{#each table.Orders}}
       <div class="card-body">
@@ -30,11 +30,9 @@
       </div>
     </div>
     <div class="text-end">
-      <form action="/tables/checkout" method="POST">
-        <input type="hidden" name="tableId" id="tableId" value="{{table.id}}">
-        <a class="btn btn-secondary mt-3" href="/tables">返回</a>
-        <button type="submit" class="btn btn-dark mt-3" style="min-width: 120px;">結帳</button>
-      </form>
+      <a class="btn btn-secondary mt-3" href="/tables">返回</a>
+      <button type="button" class="btn btn-dark mt-3" style="min-width: 120px;" data-bs-toggle="modal"
+        data-bs-target="#checkout">結帳</button>
     </div>
   </div>
 
@@ -75,5 +73,39 @@
         </div>
       </form>
     </section>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="checkout" tabindex="-1" aria-labelledby="checkout" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="checkout">結帳方式</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body d-flex">
+        <form action="/tables/checkout" method="POST">
+          <input type="hidden" name="tableId" id="tableId" value="{{table.id}}">
+          <input type="hidden" name="payment" id="payment" value="現金">
+          <button type="submit" class="btn btn-lg btn-success me-3">現金</button>
+        </form>
+        <form action="/tables/checkout" method="POST">
+          <input type="hidden" name="tableId" id="tableId" value="{{table.id}}">
+          <input type="hidden" name="payment" id="payment" value="刷卡">
+          <button type="submit" class="btn btn-lg btn-danger me-3">刷卡</button>
+        </form>
+        <form action="/tables/checkout" method="POST">
+          <input type="hidden" name="tableId" id="tableId" value="{{table.id}}">
+          <input type="hidden" name="payment" id="payment" value="外帶">
+          <button type="submit" class="btn btn-lg btn-primary me-3">外帶</button>
+        </form>
+        <form action="/tables/checkout" method="POST">
+          <input type="hidden" name="tableId" id="tableId" value="{{table.id}}">
+          <input type="hidden" name="payment" id="payment" value="UberEats">
+          <button type="submit" class="btn btn-lg btn-dark me-3">UberEats</button>
+        </form>
+      </div>
+    </div>
   </div>
 </div>
