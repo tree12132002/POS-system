@@ -17,28 +17,40 @@ const reportController = {
       }),
       Orderlist.findAll({
         where: {
-          payment: '現金'
+          payment: '現金',
+          createdAt: {
+            [Op.between]: [startTime, endTime]
+          }
         },
         raw: this,
         nest: true
       }),
       Orderlist.findAll({
         where: {
-          payment: '刷卡'
+          payment: '刷卡',
+          createdAt: {
+            [Op.between]: [startTime, endTime]
+          }
         },
         raw: this,
         nest: true
       }),
       Orderlist.findAll({
         where: {
-          payment: '外帶'
+          payment: '外帶',
+          createdAt: {
+            [Op.between]: [startTime, endTime]
+          }
         },
         raw: this,
         nest: true
       }),
       Orderlist.findAll({
         where: {
-          payment: 'UberEats'
+          payment: 'UberEats',
+          createdAt: {
+            [Op.between]: [startTime, endTime]
+          }
         },
         raw: this,
         nest: true
@@ -69,9 +81,14 @@ const reportController = {
           uberAmount += item.totalPrice
         })
 
-        const averageOrderValue = Math.round(dailyAmount / dailyCustomers)
-        const averageTableValue = Math.round(dailyAmount / orderlists.length)
+        let averageOrderValue = Math.round(dailyAmount / dailyCustomers)
+        let averageTableValue = Math.round(dailyAmount / orderlists.length)
 
+        if (dailyAmount === 0) {
+          averageOrderValue = 0
+          averageTableValue = 0
+        }
+        
         return res.render('report', {
           orderlists,
           dailyAmount,
